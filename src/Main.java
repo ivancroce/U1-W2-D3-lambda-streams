@@ -61,7 +61,7 @@ public class Main {
 
         // --------------- Exersice 1 Books > 100 -------------
 
-        System.out.println("--------------- Exersice 1 Books > 100 -------------");
+        System.out.println("--------------- Exersice 1 -------------");
 
         Predicate<Product> isCategoryBooks = product -> product.getCategory().equals("Books");
         Predicate<Product> isPriceGreaterThan100 = product -> product.getPrice() > 100;
@@ -71,9 +71,25 @@ public class Main {
 
         expensiveBooks.forEach(b -> System.out.println(b));
 
-        System.out.println("--------------- Exersice 2 Orders with Baby -------------");
+        // --------------- Exersice 2 Orders with Baby -------------
+        System.out.println("--------------- Exersice 2 -------------");
+        // stream allOrders =>
+        // filter For each order, perform a check. The order passes if the check returns true. =>
+        // anyMatch check if at least one product in the inner stream belongs to the Baby category. It returns true if at least one product has the category "Baby". =>
+        // toList Collect all the orders that passed the filter into a new list.
 
+        List<Order> babyOrders = allOrders.stream()
+                .filter(order -> order.getProducts().stream().anyMatch(product -> product.getCategory().equals("Baby")))
+                .toList();
 
+        babyOrders.forEach(b -> System.out.println(b));
+
+        // --------------- Exersice 3 Orders with Boys + 10% discount -------------
+        System.out.println("--------------- Exersice 3 -------------");
+
+        Predicate<Product> isCategoryBoys = product -> product.getCategory().equals("Boys");
+
+        // to continue
     }
 
 }
