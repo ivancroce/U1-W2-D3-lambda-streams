@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Objects;
+
 public class Product {
     private long id;
     private String name;
@@ -37,5 +39,17 @@ public class Product {
                 ", category='" + category + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id && Double.compare(price, product.price) == 0 && Objects.equals(name, product.name) && Objects.equals(category, product.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, category, price);
     }
 }

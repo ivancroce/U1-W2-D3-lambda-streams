@@ -7,6 +7,7 @@ import enums.OrderStatus;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -49,7 +50,7 @@ public class Main {
         // --------------- Orders -------------
 
         Order order1 = new Order(1001L, OrderStatus.COMPLETED, LocalDate.of(2021, 3, 5), LocalDate.of(2021, 3, 10), List.of(book1), customer1);
-        Order order2 = new Order(1002L, OrderStatus.CANCELLED, LocalDate.of(2021, 3, 5), LocalDate.of(2021, 3, 10), List.of(book2), customer2);
+        Order order2 = new Order(1002L, OrderStatus.CANCELLED, LocalDate.of(2021, 4, 3), LocalDate.of(2021, 4, 12), List.of(book2), customer2);
         Order order3 = new Order(1003L, OrderStatus.SHIPPED, LocalDate.of(2021, 5, 1), LocalDate.of(2021, 5, 5), List.of(book3), customer3);
         Order order4 = new Order(1004L, OrderStatus.PENDING, LocalDate.of(2021, 3, 15), LocalDate.of(2021, 3, 20), List.of(book1), customer4);
 
@@ -58,8 +59,20 @@ public class Main {
         List<Order> allOrders = List.of(order1, order2, order3, order4);
         allOrders.forEach(o -> System.out.println(o));
 
-        // --------------- Excersice 1 Books > 100 -------------
-        
+        // --------------- Exersice 1 Books > 100 -------------
+
+        System.out.println("--------------- Exersice 1 Books > 100 -------------");
+
+        Predicate<Product> isCategoryBooks = product -> product.getCategory().equals("Books");
+        Predicate<Product> isPriceGreaterThan100 = product -> product.getPrice() > 100;
+
+        List<Product> expensiveBooks = allProducts.stream()
+                .filter(isCategoryBooks.and(isPriceGreaterThan100)).toList();
+
+        expensiveBooks.forEach(b -> System.out.println(b));
+
+        System.out.println("--------------- Exersice 2 Orders with Baby -------------");
+
 
     }
 
